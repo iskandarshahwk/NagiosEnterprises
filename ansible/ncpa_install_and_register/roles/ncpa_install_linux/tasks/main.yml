@@ -140,13 +140,13 @@
   when: ansible_distribution == "RedHat" and ansible_distribution_major_version|int == 7
 
 - name: Save iptables Config (CentOS & RHEL 6)
-  shell: service iptables save
+  command: iptables-save
   when: ansible_distribution == "RedHat" and ansible_distribution_major_version|int == 6
 
 - name: Save iptables Config (CentOS 7)
-  shell: iptables-save
+  command: iptables-save
   when: ansible_distribution == "CentOS" and ansible_distribution_major_version|int == 7
 
 - name: Save iptables Config (ClearOS)
-  shell: service iptables save
+  command: iptables-save
   when: ansible_distribution == "ClearOS"
