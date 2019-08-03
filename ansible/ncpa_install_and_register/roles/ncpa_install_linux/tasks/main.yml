@@ -66,10 +66,8 @@
 - name: Install NCPA (SUSE & OpenSUSE)
   zypper:
     name: /tmp/ncpa.rpm
-    disable_gpg_check: yes
     state: present
   when: ansible_os_family == "Suse"
-
 
 
 # Set NCPA Token
@@ -124,23 +122,14 @@
     protocol: tcp
   when: ansible_distribution == "CentOS" and ansible_distribution_major_version|int == 7
   
-- name: Open NCPA Port (ClearOS 6)
+- name: Open NCPA Port (ClearOS)
   iptables:
     chain: INPUT
     jump: ACCEPT
     destination_port: 5693
     state: present
     protocol: tcp
-  when: ansible_distribution == "ClearOS" and ansible_distribution_major_version|int == 6
-
-- name: Open NCPA Port (ClearOS 7)
-  iptables:
-    chain: INPUT
-    jump: ACCEPT
-    destination_port: 5693
-    state: present
-    protocol: tcp
-  when: ansible_distribution == "ClearOS" and ansible_distribution_major_version|int == 7
+  when: ansible_distribution == "ClearOS"
 
 - name: Open NCPA Port (RedHat 7)
   firewalld:
@@ -158,10 +147,6 @@
   shell: iptables-save
   when: ansible_distribution == "CentOS" and ansible_distribution_major_version|int == 7
 
-- name: Save iptables Config (ClearOS 6)
+- name: Save iptables Config (ClearOS)
   shell: service iptables save
-  when: ansible_distribution == "ClearOS" and ansible_distribution_major_version|int == 6
-
-- name: Save iptables Config (ClearOS 7)
-  shell: iptables-save
-  when: ansible_distribution == "ClearOS" and ansible_distribution_major_version|int == 7
+  when: ansible_distribution == "ClearOS"
