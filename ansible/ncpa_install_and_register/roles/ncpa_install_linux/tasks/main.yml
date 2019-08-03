@@ -52,12 +52,14 @@
 - name: Install NCPA (RedHat & CentOS)
   yum:
     name: /tmp/ncpa.rpm
+    disable_gpg_check: yes
     state: present
   when: ansible_os_family == "RedHat"
   
 - name: Install NCPA (ClearOS)
   yum:
     name: /tmp/ncpa.rpm
+    disable_gpg_check: yes
     state: present
   when: ansible_os_family == "ClearOS"
 
