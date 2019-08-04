@@ -2,7 +2,7 @@
 - name: Register Host With XI
   uri:
     url: http://{{ xi_ip }}/nagiosxi/api/v1/config/host?apikey={{ xi_api_key }}
-    body: 'host_name={{ ansible_hostname|upper }}&address={{ ansible_default_ipv4.address }}&hostgroups=LINUX SERVERS'
+    body: 'host_name={{ ansible_hostname|upper }}&address={{ ansible_default_ipv4.address }}&hostgroups=LINUX+SERVERS'
     method: POST
     validate_certs: no
     timeout: 120
